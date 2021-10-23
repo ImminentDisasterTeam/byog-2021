@@ -820,7 +820,7 @@ MonoBehaviour:
     tutorial: More anti-buttons to evade!
   - levelText: {fileID: 4900000, guid: 439f9fbce1104fd43b93757c6c9fc999, type: 3}
     decorationType: 0
-    tutorial: It's not minesweeper, but it can explode your butt
+    tutorial: It's not minesweeper, but it can explode your brain
   - levelText: {fileID: 4900000, guid: c711fc2d826a8bc4b9ca027bf89da39f, type: 3}
     decorationType: 3
     tutorial: Anti-button is lava
