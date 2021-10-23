@@ -20,6 +20,7 @@ public class LevelLoader : MonoBehaviour {
     private const string PLAYER = "P";
     private const string EXIT = "Q";
     private const string EMPTY = "";
+    private const string SPACE = " ";
 
     public (List<List<Entity>>, List<List<Button>>, PlayerEntity, ExitEntity) LoadLevel(string csvLevel) {
         var strLevel = csvLevel.Split('\n').Select(row => row.Split(',').ToArray()).ToArray();
@@ -56,6 +57,7 @@ public class LevelLoader : MonoBehaviour {
                         prefab = _exitPrefab;
                         break;
                     case EMPTY:
+                    case SPACE:
                         prefab = null;
                         break;
                     case BUTTON:
