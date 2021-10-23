@@ -23,6 +23,7 @@ public class LevelController : MonoBehaviour {
 
     [SerializeField] private LevelLoader _levelLoader;
     [SerializeField] private CameraController _cameraController;
+    [SerializeField] private Transform _mapRoot;
 
     private readonly Map _map;
     private readonly GameLogic _gameLogic;
@@ -34,7 +35,7 @@ public class LevelController : MonoBehaviour {
             throw new ApplicationException("ONLY ONE UICONTROLLER ALLOWED");
         Instance = this;
 
-        _map = new Map();
+        _map = new Map(_mapRoot);
         _gameLogic = new GameLogic(_map);
         _map.OnButtonsUpdate = _gameLogic.CheckButtons;
     }
@@ -42,13 +43,13 @@ public class LevelController : MonoBehaviour {
     public void StartLevel(int levelIndex) {
         _currentLevelIndex = levelIndex;
         var levelData = _levels[levelIndex];
-        var (level, buttons, player, exit) = _levelLoader.LoadLevel(levelData.levelText.text);
+        var (level, buttons, floors, player, exit) = _levelLoader.LoadLevel(_mapRoot, levelData.levelText.text, levelData.decorationType);
 
         UIController.Instance.SetTutorial(levelData.tutorial);
 
         var buttonList = (from row in buttons from button in row where button != null select button).ToList();
         _gameLogic.SetEntities(player, exit, buttonList, this);
-        _map.SetMap(level, buttons);
+        _map.SetMap(level, buttons, floors);
 
         var levelSize = new Vector2Int(level.Count, level[0].Count);
         _cameraController.Set(levelSize);
@@ -89,7 +90,15 @@ public class LevelController : MonoBehaviour {
     [Serializable]
     public struct Level {
         public TextAsset levelText;
-        public int difficulty;
+        public DecorationType decorationType;
         public string tutorial;
+    }
+
+    public enum DecorationType {
+        Green,
+        Yellow,
+        Orange,
+        Red,
+        Ice
     }
 }

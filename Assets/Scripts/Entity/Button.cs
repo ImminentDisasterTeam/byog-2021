@@ -2,8 +2,8 @@
 
 public class Button : MonoBehaviour {
     [SerializeField] private SpriteRenderer _sprite;
-    [SerializeField] private Color _pressed;
-    [SerializeField] private Color _notPressed;
+    [SerializeField] private Sprite _pressed;
+    [SerializeField] private Sprite _notPressed;
     protected bool _isPressed;
 
     public bool IsPressed {
@@ -18,7 +18,7 @@ public class Button : MonoBehaviour {
     }
 
     private void SetSpiteState() {
-        _sprite.color = _isPressed ? _pressed : _notPressed;
+        _sprite.sprite = _isPressed ? _pressed : _notPressed;
     }
 
     public void SetPosition(Vector2Int pos) {

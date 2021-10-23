@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6462445900042784048}
   - component: {fileID: 6462445900042784049}
-  - component: {fileID: 6462445900042784051}
+  - component: {fileID: -3973096392341699321}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,10 +69,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 353950423
+  m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7900704208466002760, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  m_Sprite: {fileID: 3570191054287959502, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6462445900042784051
+--- !u!114 &-3973096392341699321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6462445900042784054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2524aac9471452782f6c8651920df9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 60dc80dfa733405782a3760102dc37ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 6462445900042784049}

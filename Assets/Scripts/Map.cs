@@ -7,17 +7,25 @@ using Object = UnityEngine.Object;
 public class Map {
     public Action OnButtonsUpdate;
     public static readonly Vector2Int NoPos = Vector2Int.one * -1;
+    private readonly Transform _mapRoot;
     private List<List<Entity>> _map;
     private List<List<Button>> _buttons;
+    private List<List<Floor>> _floors;
 
-    public void SetMap(List<List<Entity>> map, List<List<Button>> buttons) {
+    public Map(Transform mapRoot) {
+        _mapRoot = mapRoot;
+    }
+
+    public void SetMap(List<List<Entity>> map, List<List<Button>> buttons, List<List<Floor>> floors) {
         Clear();
         _map = map;
         _buttons = buttons;
+        _floors = floors;
         for (var i = 0; i < _map.Count; i++) {
             for (var j = 0; j < _map[i].Count; j++) {
                 _map[i][j]?.SetPosition(new Vector2Int(i, j), true);
                 _buttons[i][j]?.SetPosition(new Vector2Int(i, j));
+                _floors[i][j]?.SetPosition(new Vector2Int(i, j));
             }
         }
         UpdateButtons();
@@ -64,6 +72,13 @@ public class Map {
             foreach (var button in row) {
                 if (button != null)
                     Object.Destroy(button.gameObject);
+            }
+        }
+
+        foreach (var row in _floors) {
+            foreach (var floor in row) {
+                if (floor != null)
+                    Object.Destroy(floor.gameObject);
             }
         }
 

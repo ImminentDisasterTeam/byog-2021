@@ -2,8 +2,8 @@
 
 public class ExitEntity : Entity {
     [SerializeField] private SpriteRenderer _sprite;
-    [SerializeField] private Color _active;
-    [SerializeField] private Color _notActive;
+    [SerializeField] private Sprite _active;
+    [SerializeField] private Sprite _notActive;
     private bool _isActive;
 
     public bool IsActive {
@@ -14,8 +14,12 @@ public class ExitEntity : Entity {
         }
     }
 
+    public Sprite ActiveSprite {
+        set => _active = value;
+    }
+
     private void SetSpiteState() {
-        _sprite.color = _isActive ? _active : _notActive;
+        _sprite.sprite = _isActive ? _active : _notActive;
     }
 
     public override bool CanBeMoved() {

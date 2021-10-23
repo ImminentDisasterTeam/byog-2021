@@ -751,14 +751,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606f2bfe4d394784b3729d898a88f0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelRoot: {fileID: 343391288}
   _wallPrefab: {fileID: 6462445900042784051, guid: 87443a00d1e3fbf4baf8a784378bfc09, type: 3}
   _blockPrefab: {fileID: 1484172682530853117, guid: db0048fe84c37484ba9ff35fb312d9cf, type: 3}
   _sliderPrefab: {fileID: -3673833830419444537, guid: 1b4c06d64e1fc41469694976bbb565db, type: 3}
   _playerPrefab: {fileID: 3136798013349494285, guid: fbd54d17013a9874e9fb7c1356efd63c, type: 3}
   _exitPrefab: {fileID: 5990350694188290192, guid: 4c75b1950505c3647a1090cf76013e0c, type: 3}
   _buttonPrefab: {fileID: 7574097880470369771, guid: 5f17cb25c2af1a1429e3146277ed85e9, type: 3}
+  _floorPrefab: {fileID: -3973096392341699321, guid: db814433f60889e48a87f0047f2e718e, type: 3}
   _antiButtonPrefab: {fileID: 7419875852617806223, guid: fe224575c39baec44b5ea6068797f5fa, type: 3}
+  _greenWall: {fileID: 4322945801204656576, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  _yellowWall: {fileID: -33006074358083733, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  _orangeWall: {fileID: 880142874745771225, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  _redWall: {fileID: 1700633351461428497, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  _iceWall: {fileID: -7900704208466002760, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  _normalFloor: {fileID: 3570191054287959502, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  _iceFloor: {fileID: -1148259888870125099, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  _normalDoor: {fileID: 5490372308799834089, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
+  _iceDoor: {fileID: -8979827180497537828, guid: 91bd403f16144ad43b321352b405bb0b, type: 3}
 --- !u!114 &2004048939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,63 +782,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levels:
   - levelText: {fileID: 4900000, guid: e48bee2d599e5dd46b2544fd61ccb52d, type: 3}
-    difficulty: 0
+    decorationType: 0
     tutorial: '"Try to MOVE (WASD) blocks by your body.  Then REWIND(R) blocks''
       moves in order you moved it. Reach the exit."'
   - levelText: {fileID: 4900000, guid: 485816ed4a45b4548bf388aaad345970, type: 3}
-    difficulty: 0
+    decorationType: 0
     tutorial: Make block move by rewind!
   - levelText: {fileID: 4900000, guid: 3fa9c7744da7d984f8950cdee0ca2544, type: 3}
-    difficulty: 1
+    decorationType: 0
     tutorial: Blocks can move other blocks!
   - levelText: {fileID: 4900000, guid: 75265a21e4553af4aba19c7727121dc3, type: 3}
-    difficulty: 2
+    decorationType: 0
     tutorial: Block which stands on button will open the door.
   - levelText: {fileID: 4900000, guid: a4c549e29f47d5b42afabc115eda45b3, type: 3}
-    difficulty: 3
+    decorationType: 0
     tutorial: Did you know that blocks can move you?
   - levelText: {fileID: 4900000, guid: ed9eaec531e88d4409ad63d0f515d5ad, type: 3}
-    difficulty: 0
+    decorationType: 0
     tutorial: Just think in all directions
   - levelText: {fileID: 4900000, guid: b862ad0e958b3054b8610aa0a3e84b41, type: 3}
-    difficulty: 1
+    decorationType: 0
     tutorial: Rewind it! Rewind it!
   - levelText: {fileID: 4900000, guid: 899c7236bc9c02947912a7166f69dcf6, type: 3}
-    difficulty: 2
+    decorationType: 0
     tutorial: Reset it! Reset it more!
   - levelText: {fileID: 4900000, guid: 5f40321c6eeae45408d7ea402d3bf121, type: 3}
-    difficulty: 3
+    decorationType: 0
     tutorial: Tssssss.....BOOOM!
   - levelText: {fileID: 4900000, guid: b8f0ff97632f2904bb3cc29c22227bee, type: 3}
-    difficulty: 0
+    decorationType: 0
     tutorial: Nobody here to help you...
   - levelText: {fileID: 4900000, guid: 98cdb92bd5bc8fd4697b03b8b18b175a, type: 3}
-    difficulty: 1
+    decorationType: 0
     tutorial: Anti-button don't want to be stepped on
   - levelText: {fileID: 4900000, guid: cfdbbe152dbb92c4f8da8a274bc759dc, type: 3}
-    difficulty: 2
+    decorationType: 0
     tutorial: More anti-buttons to evade!
   - levelText: {fileID: 4900000, guid: 439f9fbce1104fd43b93757c6c9fc999, type: 3}
-    difficulty: 3
+    decorationType: 0
     tutorial: It's not minesweeper, but it can explode your butt
   - levelText: {fileID: 4900000, guid: c711fc2d826a8bc4b9ca027bf89da39f, type: 3}
-    difficulty: 0
+    decorationType: 0
     tutorial: Anti-button is lava
   - levelText: {fileID: 4900000, guid: daf46d174a679d241adfd1b9384954c0, type: 3}
-    difficulty: 0
+    decorationType: 4
     tutorial: Ice block can't stop until meet the wall. Use it.
   - levelText: {fileID: 4900000, guid: c2a39b07a04d9534eaf9378ef157c5cb, type: 3}
-    difficulty: 0
+    decorationType: 4
     tutorial: Frosty...
   - levelText: {fileID: 4900000, guid: b62b6d2d6653ffb4ebd2924bd6503769, type: 3}
-    difficulty: 0
+    decorationType: 0
     tutorial: I don't think that freeze allergy is OK
   - levelText: {fileID: 4900000, guid: 77c0f0482377eb64ab6cdb0fc7e64c0a, type: 3}
-    difficulty: 0
+    decorationType: 0
     tutorial: just why
   _allLevelsAvailable: 1
   _levelLoader: {fileID: 2004048938}
   _cameraController: {fileID: 2004048937}
+  _mapRoot: {fileID: 343391288}
 --- !u!114 &2004048940
 MonoBehaviour:
   m_ObjectHideFlags: 0
