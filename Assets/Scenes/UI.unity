@@ -783,17 +783,16 @@ MonoBehaviour:
   _levels:
   - levelText: {fileID: 4900000, guid: e48bee2d599e5dd46b2544fd61ccb52d, type: 3}
     decorationType: 0
-    tutorial: '"Try to MOVE (WASD) blocks by your body.  Then REWIND(R) blocks''
-      moves in order you moved it. Reach the exit."'
+    tutorial: '"MOVE (WASD) blocks with your body. Then reverse blocks'' moves in the same order in which blocks were interacted with using REWIND (R). Reach the exit."'
   - levelText: {fileID: 4900000, guid: 485816ed4a45b4548bf388aaad345970, type: 3}
     decorationType: 0
-    tutorial: Make block move by rewind!
+    tutorial: Make blocks move using rewind!
   - levelText: {fileID: 4900000, guid: 3fa9c7744da7d984f8950cdee0ca2544, type: 3}
     decorationType: 1
     tutorial: Blocks can move other blocks!
   - levelText: {fileID: 4900000, guid: 75265a21e4553af4aba19c7727121dc3, type: 3}
     decorationType: 1
-    tutorial: Block which stands on button will open the door.
+    tutorial: Place a block on each button to open the door.
   - levelText: {fileID: 4900000, guid: a4c549e29f47d5b42afabc115eda45b3, type: 3}
     decorationType: 2
     tutorial: Did you know that blocks can move you?
@@ -805,7 +804,7 @@ MonoBehaviour:
     tutorial: Reset it! Reset it more!
   - levelText: {fileID: 4900000, guid: ed9eaec531e88d4409ad63d0f515d5ad, type: 3}
     decorationType: 3
-    tutorial: Just think in all directions
+    tutorial: Just think in all directions.
   - levelText: {fileID: 4900000, guid: 5f40321c6eeae45408d7ea402d3bf121, type: 3}
     decorationType: 0
     tutorial: Tssssss.....BOOOM!
@@ -814,28 +813,28 @@ MonoBehaviour:
     tutorial: Nobody here to help you...
   - levelText: {fileID: 4900000, guid: 98cdb92bd5bc8fd4697b03b8b18b175a, type: 3}
     decorationType: 0
-    tutorial: Anti-button don't want to be stepped on
+    tutorial: Anti-buttons don't want to be stepped on.
   - levelText: {fileID: 4900000, guid: cfdbbe152dbb92c4f8da8a274bc759dc, type: 3}
     decorationType: 1
     tutorial: More anti-buttons to evade!
   - levelText: {fileID: 4900000, guid: 439f9fbce1104fd43b93757c6c9fc999, type: 3}
     decorationType: 0
-    tutorial: It's not minesweeper, but it can explode your brain
+    tutorial: It's not minesweeper, but it can explode your brain.
   - levelText: {fileID: 4900000, guid: c711fc2d826a8bc4b9ca027bf89da39f, type: 3}
     decorationType: 3
-    tutorial: Anti-button is lava
+    tutorial: Anti-button is lava.
   - levelText: {fileID: 4900000, guid: daf46d174a679d241adfd1b9384954c0, type: 3}
     decorationType: 4
-    tutorial: Ice block can't stop until meet the wall. Use it.
+    tutorial: Ice blocks won't stop until they collide with a wall. Use them.
   - levelText: {fileID: 4900000, guid: c2a39b07a04d9534eaf9378ef157c5cb, type: 3}
     decorationType: 4
     tutorial: Frosty...
   - levelText: {fileID: 4900000, guid: b62b6d2d6653ffb4ebd2924bd6503769, type: 3}
     decorationType: 4
-    tutorial: I don't think that freeze allergy is OK
+    tutorial: I don't think that frost allergy is OK.
   - levelText: {fileID: 4900000, guid: 77c0f0482377eb64ab6cdb0fc7e64c0a, type: 3}
     decorationType: 4
-    tutorial: just why
+    tutorial: Just why?
   _allLevelsAvailable: 1
   _levelLoader: {fileID: 2004048938}
   _cameraController: {fileID: 2004048937}
