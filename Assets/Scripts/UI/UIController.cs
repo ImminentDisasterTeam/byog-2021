@@ -56,9 +56,8 @@ namespace UI {
         public void ShowCredits(MainMenu invoker) {
             ShowHider();
             _credits.transform.SetAsLastSibling();
-            _credits.Show(null, () => {
-                invoker.transform.SetAsLastSibling();
-            });
+            _credits.OnStartHiding += () => HideHider();
+            _credits.Show(null);
         }
 
         public void ShowLevelUI(Action onCurtainMiddle) {
