@@ -78,6 +78,8 @@ public class Map {
         var position = GetPos(entity);
         var positionsToMove = new List<Vector2Int> {position};
         var movedEntities = new List<Entity>();
+        if (!(entity is PlayerEntity))
+            movedEntities.Add(entity);
 
         for (var nextPos = position + direction; OnBoard(nextPos); nextPos += direction) {
             var currentEntity = GetEntity(nextPos);
@@ -100,8 +102,16 @@ public class Map {
         }
 
         UpdateButtons();
+        var appliedMoves = movedEntities.Select(e => (e, direction)).ToList();
+        var slider = entity as SlidingEntity ?? 
+                     movedEntities.Count > 0? movedEntities[0] as SlidingEntity : null;
+        if (slider != null) {
+            var nextMoves = Move(slider, direction);
+            if (nextMoves != null)
+                appliedMoves.AddRange(nextMoves);
+        }
 
-        return movedEntities.Select(e => (e, direction)).ToList();
+        return appliedMoves;
     }
 
     private void UpdateButtons() {

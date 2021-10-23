@@ -7,6 +7,7 @@ public class LevelLoader : MonoBehaviour {
     [SerializeField] private Transform _levelRoot;
     [SerializeField] private WallEntity _wallPrefab;
     [SerializeField] private BlockEntity _blockPrefab;
+    [SerializeField] private BlockEntity _sliderPrefab;
     [SerializeField] private PlayerEntity _playerPrefab;
     [SerializeField] private ExitEntity _exitPrefab;
     [SerializeField] private Button _buttonPrefab;
@@ -16,6 +17,7 @@ public class LevelLoader : MonoBehaviour {
 
     private const string WALL = "W";
     private const string BLOCK = "B";
+    private const string SLIDER = "I";
     private const string BUTTON = "D";
     private const string PRESSED_BUTTON = "E";
     private const string ANTIBUTTON = "Y";
@@ -52,6 +54,9 @@ public class LevelLoader : MonoBehaviour {
                         break;
                     case BLOCK:
                         prefab = _blockPrefab;
+                        break;
+                    case SLIDER:
+                        prefab = _sliderPrefab;
                         break;
                     case PLAYER:
                         prefab = _playerPrefab;

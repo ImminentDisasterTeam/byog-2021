@@ -84,8 +84,8 @@ namespace UI {
         }
 
         private void ShowCurtain(Action onCurtainMiddle, bool startFromMiddle = false) {
-            const float fadeTime = 0.5f;
-            const float waitTime = 0.6f;
+            const float fadeTime = 0.25f;
+            const float waitTime = 0.35f;
 
             _curtain.alpha = 0f;
 
