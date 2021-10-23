@@ -19,7 +19,7 @@ namespace UI {
         }
 
         protected override void PerformShow(Action onDone) {
-            _nextLevelButton.gameObject.SetActive(_finishedLevelIndex < LevelController.Instance.MaxLevelAvailable);
+            _nextLevelButton.gameObject.SetActive(_finishedLevelIndex < LevelController.Instance.LevelCount - 1);
             onDone?.Invoke();
         }
 
