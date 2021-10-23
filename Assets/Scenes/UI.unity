@@ -786,7 +786,7 @@ MonoBehaviour:
     difficulty: 0
     tutorial: '"Try to MOVE (WASD) blocks by your body.  Then REWIND(R) blocks''
       moves in order you moved it. Reach the exit."'
-  - levelText: {fileID: 4900000, guid: 6f5ba1acd3021534696b4d91c74a7fcc, type: 3}
+  - levelText: {fileID: 4900000, guid: 485816ed4a45b4548bf388aaad345970, type: 3}
     difficulty: 0
     tutorial: Make block move by rewind!
   - levelText: {fileID: 4900000, guid: 3fa9c7744da7d984f8950cdee0ca2544, type: 3}
