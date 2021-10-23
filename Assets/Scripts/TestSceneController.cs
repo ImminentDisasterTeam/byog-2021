@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class TestSceneController : MonoBehaviour {
     [SerializeField] private CameraController _cameraController;
@@ -6,9 +9,11 @@ public class TestSceneController : MonoBehaviour {
     [SerializeField] private TextAsset _levelText;
 
     private void Start() {
-        var (level, player, exit) = _levelLoader.LoadLevel(_levelText.text);
-        Map.Instance.SetMap(level);
-        GameLogic.Instance.SetEntities(player, exit, this);
+        var (level, buttons, player, exit) = _levelLoader.LoadLevel(_levelText.text);
+
+        var buttonList = (from row in buttons from button in row where button != null select button).ToList();
+        GameLogic.Instance.SetEntities(player, exit, buttonList, this);
+        Map.Instance.SetMap(level, buttons);
 
         var levelSize = new Vector2Int(level.Count, level[0].Count);
         _cameraController.Set(levelSize);
@@ -27,7 +32,7 @@ public class TestSceneController : MonoBehaviour {
 
             Debug.LogWarning(log);
         };
-        player.OnPlayerRewind += () => Debug.LogWarning("R");
+        player.OnPlayerReset += () => Debug.LogWarning("R");
         GameLogic.Instance.OnLevelWin += () => Debug.LogWarning("YOU WON");
     }
 }

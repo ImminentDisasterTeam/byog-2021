@@ -10,8 +10,8 @@ public class PlayerEntity : Entity {
     const string ESCAPE = "ESCAPE";
 
     public Action<Vector2Int> OnPlayerMove;
-    public Action OnPlayerRewind;
-    public bool movementAllowed = true;
+    public Action OnPlayerReset;
+    public bool MovementAllowed { get; set; } = true;
 
     public override bool CanBeMoved() {
         return true;
@@ -22,7 +22,7 @@ public class PlayerEntity : Entity {
     }
 
     private void HandleInput() {
-        if (!movementAllowed)
+        if (!MovementAllowed)
             return;
 
         Vector2Int direction;
@@ -40,7 +40,7 @@ public class PlayerEntity : Entity {
             return;
 
         if (direction == Vector2Int.zero) {
-            OnPlayerRewind?.Invoke();
+            OnPlayerReset?.Invoke();
             return;
         }
 

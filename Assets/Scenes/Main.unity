@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 1698893679}
   _levelLoader: {fileID: 1698893678}
-  _levelText: {fileID: 4900000, guid: 890a1b759f645734cb2672c6aa051bc9, type: 3}
+  _levelText: {fileID: 4900000, guid: 9dd4ba90c25c6fd46987c12753dbe310, type: 3}
 --- !u!4 &1698893677
 Transform:
   m_ObjectHideFlags: 0
@@ -271,6 +271,7 @@ MonoBehaviour:
   _blockPrefab: {fileID: 1484172682530853117, guid: db0048fe84c37484ba9ff35fb312d9cf, type: 3}
   _playerPrefab: {fileID: 3136798013349494285, guid: fbd54d17013a9874e9fb7c1356efd63c, type: 3}
   _exitPrefab: {fileID: 5990350694188290192, guid: 4c75b1950505c3647a1090cf76013e0c, type: 3}
+  _buttonPrefab: {fileID: 7574097880470369771, guid: 5f17cb25c2af1a1429e3146277ed85e9, type: 3}
 --- !u!114 &1698893679
 MonoBehaviour:
   m_ObjectHideFlags: 0

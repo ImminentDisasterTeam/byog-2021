@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
+using System.Linq;
 using UnityEngine;
-using Object = System.Object;
 
 public class GameLogic {
     private static GameLogic _instance;
@@ -11,26 +10,31 @@ public class GameLogic {
     private GameLogic() {}
 
     public Action OnLevelWin;
-    
+
     private PlayerEntity _player;
     private ExitEntity _exit;
     private readonly List<(Entity, Vector2Int)> _moves = new List<(Entity, Vector2Int)>();
     private MonoBehaviour _coroRunner;
+    private List<Button> _buttons;
 
-
-    public void SetEntities(PlayerEntity player, ExitEntity exit, MonoBehaviour coroRunner) {
+    public void SetEntities(PlayerEntity player, ExitEntity exit, List<Button> buttons, MonoBehaviour coroRunner) {
         _player = player;
         _exit = exit;
+        _buttons = buttons;
         _coroRunner = coroRunner;
         _player.OnPlayerMove += OnPlayerMove;
-        _player.OnPlayerRewind += OnPlayerRewind;
+        _player.OnPlayerReset += OnPlayerRewind;
         _moves.Clear();
+    }
+
+    public void CheckButtons() {
+        _exit.IsActive = _buttons.All(b => b.IsPressed);
     }
 
     private void OnPlayerMove(Vector2Int direction) {
         var playerPos = Map.Instance.GetPos(_player);
         var destinationEntity = Map.Instance.GetEntity(playerPos + direction);
-        if (destinationEntity == _exit && _exit.active) {
+        if (destinationEntity == _exit && _exit.IsActive) {
             OnLevelWin?.Invoke();
             return;
         }
@@ -44,11 +48,11 @@ public class GameLogic {
         if (_moves.Count == 0)
             return;
 
-        _player.movementAllowed = false;
+        _player.MovementAllowed = false;
         _coroRunner.StartCoroutine(Reset());
     }
 
-    IEnumerator Reset() {
+    private IEnumerator Reset() {
         const float timePerMove = 0.2f;
 
         foreach (var (entity, move) in _moves) {
@@ -59,6 +63,6 @@ public class GameLogic {
         }
 
         _moves.Clear();
-        _player.movementAllowed = true;
+        _player.MovementAllowed = true;
     }
 }

@@ -11,15 +11,19 @@ class Map {
 
     public static readonly Vector2Int NoPos = Vector2Int.one * -1;
     private List<List<Entity>> _map;
+    private List<List<Button>> _buttons;
 
-    public void SetMap(List<List<Entity>> map) {
+    public void SetMap(List<List<Entity>> map, List<List<Button>> buttons) {
         ClearMap();
         _map = map;
+        _buttons = buttons;
         for (var i = 0; i < _map.Count; i++) {
             for (var j = 0; j < _map[i].Count; j++) {
                 _map[i][j]?.SetPosition(new Vector2Int(i, j), true);
+                _buttons[i][j]?.SetPosition(new Vector2Int(i, j));
             }
         }
+        UpdateButtons();
     }
 
     public Vector2Int GetPos(Entity entity) {
@@ -32,7 +36,7 @@ class Map {
                 }
             }
         }
-        
+
         if (position == NoPos)
             throw new Exception("NO ENTITY");
 
@@ -57,6 +61,15 @@ class Map {
                 Object.Destroy(tile);
             }
         }
+
+        foreach (var row in _buttons) {
+            foreach (var button in row) {
+                Object.Destroy(button);
+            }
+        }
+
+        _map = null;
+        _buttons = null;
     }
 
     public List<(Entity, Vector2Int)> Move(Entity entity, Vector2Int direction) {
@@ -71,7 +84,7 @@ class Map {
             var currentEntity = GetEntity(nextPos);
             if (currentEntity == null)
                 break;
-            
+
             if (!currentEntity.CanBeMoved())
                 return null;
 
@@ -87,6 +100,19 @@ class Map {
             _map[pos.x][pos.y] = null;
         }
 
+        UpdateButtons();
+
         return movedEntities.Select(e => (e, direction)).ToList();
+    }
+
+    private void UpdateButtons() {
+        for (var i = 0; i < _map.Count; i++) {
+            for (var j = 0; j < _map[i].Count; j++) {
+                var btn = _buttons[i][j];
+                if (btn != null)
+                    btn.IsPressed = _map[i][j] != null;
+            }
+        }
+        GameLogic.Instance.CheckButtons();
     }
 }
