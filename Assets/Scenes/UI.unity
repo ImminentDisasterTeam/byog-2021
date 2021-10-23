@@ -772,37 +772,44 @@ MonoBehaviour:
   _levels:
   - levelText: {fileID: 4900000, guid: e48bee2d599e5dd46b2544fd61ccb52d, type: 3}
     difficulty: 0
-    tutorial: 
+    tutorial: '"Try to MOVE (WASD) blocks by your body.  Then RESET (R) blocks''
+      moves in order you moved it. Reach the exit."'
   - levelText: {fileID: 4900000, guid: 3fa9c7744da7d984f8950cdee0ca2544, type: 3}
-    difficulty: 0
-    tutorial: 
+    difficulty: 1
+    tutorial: Blocks can move other blocks!
   - levelText: {fileID: 4900000, guid: 75265a21e4553af4aba19c7727121dc3, type: 3}
-    difficulty: 0
-    tutorial: 
+    difficulty: 2
+    tutorial: Block which stands on button will open the door.
   - levelText: {fileID: 4900000, guid: a4c549e29f47d5b42afabc115eda45b3, type: 3}
-    difficulty: 0
-    tutorial: 
+    difficulty: 3
+    tutorial: Did you know that blocks can move you?
   - levelText: {fileID: 4900000, guid: ed9eaec531e88d4409ad63d0f515d5ad, type: 3}
     difficulty: 0
-    tutorial: 
+    tutorial: Just think in all directions
   - levelText: {fileID: 4900000, guid: b862ad0e958b3054b8610aa0a3e84b41, type: 3}
-    difficulty: 0
-    tutorial: 
+    difficulty: 1
+    tutorial: Reset it! Reset it!
   - levelText: {fileID: 4900000, guid: 899c7236bc9c02947912a7166f69dcf6, type: 3}
-    difficulty: 0
-    tutorial: 
+    difficulty: 2
+    tutorial: Reset it! Reset it more!
   - levelText: {fileID: 4900000, guid: 5f40321c6eeae45408d7ea402d3bf121, type: 3}
-    difficulty: 0
-    tutorial: 
+    difficulty: 3
+    tutorial: Tssssss.....BOOOM!
   - levelText: {fileID: 4900000, guid: b8f0ff97632f2904bb3cc29c22227bee, type: 3}
     difficulty: 0
-    tutorial: 
+    tutorial: Nobody here to help you...
   - levelText: {fileID: 4900000, guid: 98cdb92bd5bc8fd4697b03b8b18b175a, type: 3}
-    difficulty: 0
-    tutorial: 
+    difficulty: 1
+    tutorial: Anti-button don't want to be stepped on
   - levelText: {fileID: 4900000, guid: cfdbbe152dbb92c4f8da8a274bc759dc, type: 3}
+    difficulty: 2
+    tutorial: More anti-buttons to evade!
+  - levelText: {fileID: 4900000, guid: 439f9fbce1104fd43b93757c6c9fc999, type: 3}
+    difficulty: 3
+    tutorial: It's not minesweeper, but it can explode your butt
+  - levelText: {fileID: 4900000, guid: c711fc2d826a8bc4b9ca027bf89da39f, type: 3}
     difficulty: 0
-    tutorial: 
+    tutorial: Anti-button is lava
   _allLevelsAvailable: 1
   _levelLoader: {fileID: 2004048938}
   _cameraController: {fileID: 2004048937}
