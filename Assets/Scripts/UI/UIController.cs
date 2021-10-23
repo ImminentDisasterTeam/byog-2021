@@ -76,6 +76,10 @@ namespace UI {
             });
         }
 
+        public void SetTutorial(string tutorial) {
+            _levelUI.SetTutorial(tutorial);
+        }
+
         public void ShowLevelWin(Action onClose, int finishedLevelIndex) {
             _hider.transform.SetAsLastSibling();
             _levelWin.transform.SetAsLastSibling();
