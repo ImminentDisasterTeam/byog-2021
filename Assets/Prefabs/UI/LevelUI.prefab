@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -100, y: -50}
-  m_SizeDelta: {x: 192, y: 108}
+  m_SizeDelta: {x: 108, y: 108}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &6706734089686915682
 CanvasRenderer:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseButton: {fileID: 6706734089686915680}
-  _tutorial: {fileID: 6706734089686915686}
+  _tutorial: {fileID: 2084358026308901111}
   _tutorialText: {fileID: 2084358025749102185}
 --- !u!1001 &4261733106595465458
 PrefabInstance:
@@ -274,6 +274,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edc73eb3dbf199a4dbf6822001287331, type: 3}
+--- !u!1 &2084358026308901111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2866988915657887749, guid: edc73eb3dbf199a4dbf6822001287331, type: 3}
+  m_PrefabInstance: {fileID: 4261733106595465458}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2084358026308901110 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2866988915657887748, guid: edc73eb3dbf199a4dbf6822001287331, type: 3}

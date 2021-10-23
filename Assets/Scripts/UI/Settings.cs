@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using DG.Tweening;
+using UnityEngine;
 
 namespace UI {
     public class Settings : Window {
@@ -22,6 +24,26 @@ namespace UI {
         private void OnValueChanged(float value, string type) {
             PlayerPrefs.SetFloat(type, value);
             PlayerPrefs.Save();
+        }
+
+        protected override void PerformShow(Action onDone) {
+            const float showTime = 0.5f;
+
+            transform.localScale = Vector3.zero;
+            transform
+                .DOScale(Vector3.one, showTime)
+                .SetEase(Ease.OutBack)
+                .OnComplete(() => onDone?.Invoke());
+        }
+
+        protected override void PerformHide(Action onDone) {
+            const float hideTime = 0.3f;
+
+            transform.localScale = Vector3.one;
+            transform
+                .DOScale(Vector3.zero, hideTime)
+                .SetEase(Ease.InSine)
+                .OnComplete(() => onDone?.Invoke());
         }
     }
 }

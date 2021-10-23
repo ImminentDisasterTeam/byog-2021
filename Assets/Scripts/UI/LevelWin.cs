@@ -24,7 +24,7 @@ namespace UI {
         }
 
         private void StartNextLevel() {
-            UIController.Instance.ShowLevelUI(this, () => 
+            UIController.Instance.ShowLevelUI(() => 
                 LevelController.Instance.StartLevel(_finishedLevelIndex + 1));
         }
     }

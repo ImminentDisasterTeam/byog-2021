@@ -4,6 +4,7 @@ using UnityEngine;
 namespace UI {
     public abstract class Window : MonoBehaviour {
         private Action _onClose;
+        public Action OnStartHiding;
         
         public void Show(Action onDone, Action onClose = null) {
             _onClose = onClose;
@@ -18,6 +19,9 @@ namespace UI {
         }
 
         public void Hide(Action onDone) {
+            OnStartHiding?.Invoke();
+            OnStartHiding = null;
+
             if (!gameObject.activeSelf) {
                 onDone?.Invoke();
                 return;
