@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace UI {
@@ -33,12 +34,28 @@ namespace UI {
                 button.Button.onClick.AddListener(() => StartLevel(index));
             }
 
-            onDone?.Invoke();
+            const float showTime = 0.5f;
+
+            transform.localScale = Vector3.zero;
+            transform
+                .DOScale(Vector3.one, showTime)
+                .SetEase(Ease.OutBack)
+                .OnComplete(() => onDone?.Invoke());
         }
 
         private void StartLevel(int index) {
             UIController.Instance.ShowLevelUI(() => 
                 LevelController.Instance.StartLevel(index));
+        }
+
+        protected override void PerformHide(Action onDone) {
+            const float hideTime = 0.3f;
+
+            transform.localScale = Vector3.one;
+            transform
+                .DOScale(Vector3.zero, hideTime)
+                .SetEase(Ease.InSine)
+                .OnComplete(() => onDone?.Invoke());
         }
     }
 }

@@ -28,8 +28,10 @@ namespace UI {
                 _pause.Hide(() => {
                     HideHider();
                     _levelUI.Hide(() => 
-                        ShowCurtain(onCurtainMiddle, () => 
-                            _mainMenu.Show(null), fromStart));
+                        ShowCurtain(() => {
+                            _mainMenu.Show(null);
+                            onCurtainMiddle?.Invoke();
+                        }, null, fromStart));
                 }));
         }
 
@@ -61,11 +63,12 @@ namespace UI {
         }
 
         public void ShowLevelUI(Action onCurtainMiddle) {
-            _selectLevel.Hide(() => 
-                _mainMenu.Hide(() => 
-                    _levelWin.Hide(() =>
-                        ShowCurtain(onCurtainMiddle, () =>
-                            _levelUI.Show(null)))));
+            _selectLevel.Hide(() =>
+                _levelWin.Hide(() =>
+                    ShowCurtain(() => {
+                            _mainMenu.Hide(null);
+                            onCurtainMiddle?.Invoke();
+                        }, () => _levelUI.Show(null))));
         }
 
         public void SetTutorial(string tutorial) {

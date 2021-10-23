@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace UI {
     public abstract class Window : MonoBehaviour {
-        private Action _onClose;
+        protected Action OnClose;
         public Action OnStartHiding;
         
         public void Show(Action onDone, Action onClose = null) {
-            _onClose = onClose;
+            OnClose = onClose;
 
             if (gameObject.activeSelf) {
                 onDone?.Invoke();
@@ -31,8 +31,8 @@ namespace UI {
                 gameObject.SetActive(false);
                 onDone?.Invoke();
 
-                var onClose = _onClose;
-                _onClose = null;
+                var onClose = OnClose;
+                OnClose = null;
                 onClose?.Invoke();
             });
         }
