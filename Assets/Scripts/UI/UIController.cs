@@ -18,15 +18,20 @@ namespace UI {
         [SerializeField] private Settings _settings;
         [SerializeField] private Pause _pause;
         [SerializeField] private LevelUI _levelUI;
+        [SerializeField] private LevelWin _levelWin;
         [SerializeField] private Credits _credits;
         [SerializeField] private Image _hider;
         [SerializeField] private CanvasGroup _curtain;
 
         public void ShowMainMenu(Action onCurtainMiddle = null, bool fromStart = false) {
             ShowCurtain(() => {
-                _pause.Hide(() => 
-                    _levelUI.Hide(() => 
-                        _mainMenu.Show(null)));
+                _pause.Hide(null);
+                _levelUI.Hide(null);
+                _levelWin.Hide(null);
+                _hider.gameObject.SetActive(false);
+
+                _mainMenu.Show(null);
+
                 onCurtainMiddle?.Invoke();
             }, fromStart);
         }
@@ -58,21 +63,24 @@ namespace UI {
             });
         }
 
-        public void ShowLevelUI(Window invoker = null, Action onCurtainMiddle = null) {
-            if (invoker == null) {
-                _levelUI.Show(null);
-                return;
-            }
-
+        public void ShowLevelUI(Window invoker, Action onCurtainMiddle) {
             ShowCurtain(() => {
+                _levelWin.Hide(null);
                 _mainMenu.Hide(null);
                 invoker.Hide(null);
                 _hider.gameObject.SetActive(false);
 
                 _levelUI.Show(null);
-                
+
                 onCurtainMiddle?.Invoke();
             });
+        }
+
+        public void ShowLevelWin(Action onClose, int finishedLevelIndex) {
+            _hider.transform.SetAsLastSibling();
+            _levelWin.transform.SetAsLastSibling();
+            _levelWin.SetFinishedLevel(finishedLevelIndex);
+            _levelWin.Show(null, onClose);
         }
 
         private void ShowCurtain(Action onCurtainMiddle, bool startFromMiddle = false) {

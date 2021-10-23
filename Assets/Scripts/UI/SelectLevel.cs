@@ -18,7 +18,6 @@ namespace UI {
                 Destroy(_levelRoot.GetChild(i).gameObject);
             }
 
-            var currentMaxLevel = PlayerPrefs.GetInt(LevelController.LEVEL_KEY, 0);
             var levelController = LevelController.Instance;
 
             RectTransform row = null;
@@ -28,7 +27,7 @@ namespace UI {
 
                 var button = Instantiate(_buttonPrefab, row);
                 button.Label = $"{i + 1}";
-                button.enabled = i <= currentMaxLevel || levelController.AllLevelsAvilable;
+                button.Button.enabled = i <= levelController.MaxLevelAvailable;
 
                 var index = i;
                 button.Button.onClick.AddListener(() => StartLevel(index));
