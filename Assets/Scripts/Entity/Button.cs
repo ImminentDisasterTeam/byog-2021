@@ -4,14 +4,17 @@ public class Button : MonoBehaviour {
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private Color _pressed;
     [SerializeField] private Color _notPressed;
-    private bool _isPressed;
+    protected bool _isPressed;
 
     public bool IsPressed {
-        get => _isPressed;
         set {
             _isPressed = value;
             SetSpiteState();
         }
+    }
+
+    public virtual bool IsActive() {
+        return _isPressed;
     }
 
     private void SetSpiteState() {

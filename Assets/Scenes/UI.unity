@@ -7759,7 +7759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1851755052
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8470,6 +8470,7 @@ MonoBehaviour:
   _playerPrefab: {fileID: 3136798013349494285, guid: fbd54d17013a9874e9fb7c1356efd63c, type: 3}
   _exitPrefab: {fileID: 5990350694188290192, guid: 4c75b1950505c3647a1090cf76013e0c, type: 3}
   _buttonPrefab: {fileID: 7574097880470369771, guid: 5f17cb25c2af1a1429e3146277ed85e9, type: 3}
+  _antibuttonPrefab: {fileID: 7419875852617806223, guid: fe224575c39baec44b5ea6068797f5fa, type: 3}
 --- !u!114 &2004048939
 MonoBehaviour:
   m_ObjectHideFlags: 0

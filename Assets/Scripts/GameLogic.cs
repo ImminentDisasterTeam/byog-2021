@@ -29,7 +29,7 @@ public class GameLogic {
     }
 
     public void CheckButtons() {
-        _exit.IsActive = _buttons.All(b => b.IsPressed);
+        _exit.IsActive = _buttons.All(b => b.IsActive());
     }
 
     private void OnPlayerMove(Vector2Int direction) {

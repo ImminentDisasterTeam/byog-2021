@@ -10,13 +10,16 @@ public class LevelLoader : MonoBehaviour {
     [SerializeField] private PlayerEntity _playerPrefab;
     [SerializeField] private ExitEntity _exitPrefab;
     [SerializeField] private Button _buttonPrefab;
+    [SerializeField] private AntiButton _antiButtonPrefab;
 
     public const string LevelDirectory = "Assets/Levels/";
 
     private const string WALL = "W";
     private const string BLOCK = "B";
     private const string BUTTON = "D";
-    private const string ENABLED_BUTTON = "E";
+    private const string PRESSED_BUTTON = "E";
+    private const string ANTIBUTTON = "Y";
+    private const string PRESSED_ANTIBUTTON = "N";
     private const string PLAYER = "P";
     private const string EXIT = "Q";
     private const string EMPTY = "";
@@ -61,10 +64,15 @@ public class LevelLoader : MonoBehaviour {
                         prefab = null;
                         break;
                     case BUTTON:
-                    case ENABLED_BUTTON:
-                        prefab = token == ENABLED_BUTTON ? _blockPrefab : null;
+                    case PRESSED_BUTTON:
+                        prefab = token == PRESSED_BUTTON ? _blockPrefab : null;
                         button = Instantiate(_buttonPrefab, _levelRoot);
-                        break; // TODO
+                        break;
+                    case ANTIBUTTON:
+                    case PRESSED_ANTIBUTTON:
+                        prefab = token == PRESSED_ANTIBUTTON ? _blockPrefab : null;
+                        button = Instantiate(_antiButtonPrefab, _levelRoot);
+                        break;
                     default:
                         throw new ApplicationException($"UNKNOWN TOKEN \"{token}\"; {i} {j}");
                 }
