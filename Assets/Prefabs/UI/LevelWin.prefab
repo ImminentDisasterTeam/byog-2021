@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 8115570566691586947}
   - component: {fileID: 8115570566691586957}
   - component: {fileID: 8115570566691586956}
+  - component: {fileID: 1891907429766295945}
   m_Layer: 5
   m_Name: LevelWin
   m_TagString: Untagged
@@ -396,6 +397,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.2
+--- !u!114 &1891907429766295945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115570566691586946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b37dbaec7e9480da85fa02afe8bb28c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nextLevelButton: {fileID: 8115570567976931675}
+  _exitButton: {fileID: 8115570566411809405}
 --- !u!1 &8115570567112090725
 GameObject:
   m_ObjectHideFlags: 0
