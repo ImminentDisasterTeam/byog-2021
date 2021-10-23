@@ -765,6 +765,7 @@ MonoBehaviour:
   _levelRoot: {fileID: 343391288}
   _wallPrefab: {fileID: 6462445900042784051, guid: 87443a00d1e3fbf4baf8a784378bfc09, type: 3}
   _blockPrefab: {fileID: 1484172682530853117, guid: db0048fe84c37484ba9ff35fb312d9cf, type: 3}
+  _sliderPrefab: {fileID: -3673833830419444537, guid: 1b4c06d64e1fc41469694976bbb565db, type: 3}
   _playerPrefab: {fileID: 3136798013349494285, guid: fbd54d17013a9874e9fb7c1356efd63c, type: 3}
   _exitPrefab: {fileID: 5990350694188290192, guid: 4c75b1950505c3647a1090cf76013e0c, type: 3}
   _buttonPrefab: {fileID: 7574097880470369771, guid: 5f17cb25c2af1a1429e3146277ed85e9, type: 3}
