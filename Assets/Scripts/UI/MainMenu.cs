@@ -8,6 +8,7 @@ namespace UI {
         [SerializeField] private UnityEngine.UI.Button _exitButton;
 
         private void Start() {
+            _selectLevelButton.onClick.AddListener(() => UIController.Instance.ShowSelectLevel(this));
             _settingsButton.onClick.AddListener(() => UIController.Instance.ShowSettings(this));
             _creditsButton.onClick.AddListener(() => UIController.Instance.ShowCredits(this));
             _exitButton.onClick.AddListener(() => UIController.Instance.CloseGame());

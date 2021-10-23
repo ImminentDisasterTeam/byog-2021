@@ -7,13 +7,18 @@ public class LevelController : MonoBehaviour {
     public static LevelController Instance { get; private set; }
 
     public const string LEVEL_KEY = "LEVEL";
+    [SerializeField] private Level[] _levels;
+    [SerializeField] private bool _allLevelsAvailable;
+
+    public int LevelCount => _levels.Length;
+    public bool AllLevelsAvilable => _allLevelsAvailable;
 
     [SerializeField] private LevelLoader _levelLoader;
     [SerializeField] private CameraController _cameraController;
-    
+
     private readonly Map _map;
     private readonly GameLogic _gameLogic;
-    private string _currentLevel;
+    private Level _currentLevel;
     private int _currentLevelIndex;
 
     public LevelController() {
@@ -26,10 +31,9 @@ public class LevelController : MonoBehaviour {
         _map.OnButtonsUpdate = _gameLogic.CheckButtons;
     }
 
-    public void StartLevel(string levelText, int levelIndex) {
-        _currentLevel = levelText;
+    public void StartLevel(int levelIndex) {
         _currentLevelIndex = levelIndex;
-        var (level, buttons, player, exit) = _levelLoader.LoadLevel(levelText);
+        var (level, buttons, player, exit) = _levelLoader.LoadLevel(_levels[levelIndex].levelText.text);
 
         var buttonList = (from row in buttons from button in row where button != null select button).ToList();
         _gameLogic.SetEntities(player, exit, buttonList, this);
@@ -57,19 +61,25 @@ public class LevelController : MonoBehaviour {
     }
 
     public void RestartLevel() {
-        StartLevel(_currentLevel, _currentLevelIndex);
+        StartLevel(_currentLevelIndex);
     }
 
     public void FinishLevel(bool success) {
-        _map.Clear();
         if (success) {
-            var currentMaxLevel = PlayerPrefs.GetInt(LEVEL_KEY, 1);
+            var currentMaxLevel = PlayerPrefs.GetInt(LEVEL_KEY, 0);
             if (currentMaxLevel == _currentLevelIndex) {
                 PlayerPrefs.SetInt(LEVEL_KEY, currentMaxLevel + 1);
                 PlayerPrefs.Save();
             }
         }
 
-        UIController.Instance.ShowMainMenu();
+        UIController.Instance.ShowMainMenu(() => _map.Clear());
+    }
+
+    [Serializable]
+    public struct Level {
+        public TextAsset levelText;
+        public int difficulty;
+        public string tutorial;
     }
 }

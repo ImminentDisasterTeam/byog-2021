@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,11 +20,23 @@ namespace UI {
         [SerializeField] private LevelUI _levelUI;
         [SerializeField] private Credits _credits;
         [SerializeField] private Image _hider;
+        [SerializeField] private CanvasGroup _curtain;
 
-        public void ShowMainMenu() {
-            _pause.Hide(() => 
-                _levelUI.Hide(() => 
-                    _mainMenu.Show(null)));
+        public void ShowMainMenu(Action onCurtainMiddle = null, bool fromStart = false) {
+            ShowCurtain(() => {
+                _pause.Hide(() => 
+                    _levelUI.Hide(() => 
+                        _mainMenu.Show(null)));
+                onCurtainMiddle?.Invoke();
+            }, fromStart);
+        }
+
+        public void ShowSelectLevel(MainMenu invoker) {
+            _hider.transform.SetAsLastSibling();
+            _selectLevel.transform.SetAsLastSibling();
+            _selectLevel.Show(null, () => {
+                invoker.transform.SetAsLastSibling();
+            });
         }
 
         public void ShowSettings(Window invoker) {
@@ -45,11 +58,37 @@ namespace UI {
             });
         }
 
-        public void ShowLevelUI(MainMenu invoker = null) {
-            invoker ??= _mainMenu;
-            invoker.Hide(() => {
+        public void ShowLevelUI(Window invoker = null, Action onCurtainMiddle = null) {
+            if (invoker == null) {
                 _levelUI.Show(null);
+                return;
+            }
+
+            ShowCurtain(() => {
+                _mainMenu.Hide(null);
+                invoker.Hide(null);
+                _hider.gameObject.SetActive(false);
+
+                _levelUI.Show(null);
+                
+                onCurtainMiddle?.Invoke();
             });
+        }
+
+        private void ShowCurtain(Action onCurtainMiddle, bool startFromMiddle = false) {
+            const float fadeTime = 0.5f;
+            const float waitTime = 0.6f;
+
+            _curtain.alpha = 0f;
+
+            DOTween.Sequence()
+                .AppendCallback(() => _curtain.gameObject.SetActive(true))
+                .Append(_curtain.DOFade(1f, startFromMiddle ? 0.0001f : fadeTime).SetEase(Ease.InOutSine))
+                .AppendInterval(startFromMiddle ? 0.0001f : waitTime / 2)
+                .AppendCallback(() => onCurtainMiddle?.Invoke())
+                .AppendInterval(startFromMiddle ? waitTime : waitTime / 2)
+                .Append(_curtain.DOFade(0f, fadeTime).SetEase(Ease.InOutSine))
+                .AppendCallback(() => _curtain.gameObject.SetActive(false));
         }
 
         public void ShowPause() {
