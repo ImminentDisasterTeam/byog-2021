@@ -37,7 +37,7 @@ namespace UI {
         }
 
         private void StartLevel(int index) {
-            UIController.Instance.ShowLevelUI(this, () => 
+            UIController.Instance.ShowLevelUI(() => 
                 LevelController.Instance.StartLevel(index));
         }
     }

@@ -20,60 +20,53 @@ namespace UI {
         [SerializeField] private LevelUI _levelUI;
         [SerializeField] private LevelWin _levelWin;
         [SerializeField] private Credits _credits;
-        [SerializeField] private Image _hider;
+        [SerializeField] private CanvasGroup _hider;
         [SerializeField] private CanvasGroup _curtain;
 
         public void ShowMainMenu(Action onCurtainMiddle = null, bool fromStart = false) {
-            ShowCurtain(() => {
-                _pause.Hide(null);
-                _levelUI.Hide(null);
-                _levelWin.Hide(null);
-                _hider.gameObject.SetActive(false);
-
-                _mainMenu.Show(null);
-
-                onCurtainMiddle?.Invoke();
-            }, fromStart);
+            _levelWin.Hide(() =>
+                _pause.Hide(() => {
+                    HideHider();
+                    _levelUI.Hide(() => 
+                        ShowCurtain(onCurtainMiddle, () => 
+                            _mainMenu.Show(null), fromStart));
+                }));
         }
 
-        public void ShowSelectLevel(MainMenu invoker) {
-            _hider.transform.SetAsLastSibling();
+        public void ShowSelectLevel() {
+            ShowHider();
             _selectLevel.transform.SetAsLastSibling();
-            _selectLevel.Show(null, () => {
-                invoker.transform.SetAsLastSibling();
-            });
+            _selectLevel.OnStartHiding += () => HideHider();
+            _selectLevel.Show(null);
         }
 
         public void ShowSettings(Window invoker) {
-            _hider.gameObject.SetActive(true);
-            _hider.transform.SetAsLastSibling();
+            ShowHider();
             _settings.transform.SetAsLastSibling();
+            _settings.OnStartHiding += () => {
+                if (invoker is MainMenu)
+                    HideHider();
+                    
+            };
             _settings.Show(null, () => {
                 invoker.transform.SetAsLastSibling();
-                if (invoker is MainMenu)
-                    _hider.gameObject.SetActive(false);
             });
         }
 
         public void ShowCredits(MainMenu invoker) {
-            _hider.transform.SetAsLastSibling();
+            ShowHider();
             _credits.transform.SetAsLastSibling();
             _credits.Show(null, () => {
                 invoker.transform.SetAsLastSibling();
             });
         }
 
-        public void ShowLevelUI(Window invoker, Action onCurtainMiddle) {
-            ShowCurtain(() => {
-                _levelWin.Hide(null);
-                _mainMenu.Hide(null);
-                invoker.Hide(null);
-                _hider.gameObject.SetActive(false);
-
-                _levelUI.Show(null);
-
-                onCurtainMiddle?.Invoke();
-            });
+        public void ShowLevelUI(Action onCurtainMiddle) {
+            _selectLevel.Hide(() => 
+                _mainMenu.Hide(() => 
+                    _levelWin.Hide(() =>
+                        ShowCurtain(onCurtainMiddle, () =>
+                            _levelUI.Show(null)))));
         }
 
         public void SetTutorial(string tutorial) {
@@ -81,15 +74,16 @@ namespace UI {
         }
 
         public void ShowLevelWin(Action onClose, int finishedLevelIndex) {
-            _hider.transform.SetAsLastSibling();
+            ShowHider();
             _levelWin.transform.SetAsLastSibling();
+            _levelWin.OnStartHiding += () => HideHider();
             _levelWin.SetFinishedLevel(finishedLevelIndex);
             _levelWin.Show(null, onClose);
         }
 
-        private void ShowCurtain(Action onCurtainMiddle, bool startFromMiddle = false) {
-            const float fadeTime = 0.25f;
-            const float waitTime = 0.35f;
+        private void ShowCurtain(Action onCurtainMiddle, Action onCurtainEnd = null, bool startFromMiddle = false) {
+            const float fadeTime = 0.2f;
+            const float waitTime = 0.3f;
 
             _curtain.alpha = 0f;
 
@@ -100,16 +94,50 @@ namespace UI {
                 .AppendCallback(() => onCurtainMiddle?.Invoke())
                 .AppendInterval(startFromMiddle ? waitTime : waitTime / 2)
                 .Append(_curtain.DOFade(0f, fadeTime).SetEase(Ease.InOutSine))
-                .AppendCallback(() => _curtain.gameObject.SetActive(false));
+                .AppendCallback(() => _curtain.gameObject.SetActive(false))
+                .AppendCallback(() => onCurtainEnd?.Invoke());
+        }
+
+        private void ShowHider(Action onDone = null) {
+            const float showTime = 0.5f;
+            const float shownAlpha = 0.72f;
+
+            _hider.transform.SetAsLastSibling();
+            if (_hider.gameObject.activeSelf) {
+                onDone?.Invoke();
+                return;
+            }
+            
+            _hider.gameObject.SetActive(true);
+            _hider.alpha = 0f;
+            _hider
+                .DOFade(shownAlpha, showTime)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() => onDone?.Invoke());
+        }
+
+        private void HideHider(Action onDone = null) {
+            const float hideTime = 0.3f;
+
+            if (!_hider.gameObject.activeSelf) {
+                onDone?.Invoke();
+                return;
+            }
+
+            _hider
+                .DOFade(0f, hideTime)
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() => {
+                    _hider.gameObject.SetActive(false);
+                    onDone?.Invoke();
+                });
         }
 
         public void ShowPause() {
-            _hider.gameObject.SetActive(true);
-            _hider.transform.SetAsLastSibling();
+            ShowHider();
             _pause.transform.SetAsLastSibling();
-            _pause.Show(null, () => {
-                _hider.gameObject.SetActive(false);
-            });
+            _pause.OnStartHiding += () => HideHider();
+            _pause.Show(null);
         }
         
         public void CloseGame() {

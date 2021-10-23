@@ -221,7 +221,7 @@ MonoBehaviour:
   _levelUI: {fileID: 6706734087972130894}
   _levelWin: {fileID: 1039292590}
   _credits: {fileID: 0}
-  _hider: {fileID: 1142175125}
+  _hider: {fileID: 1146505615}
   _curtain: {fileID: 6214480588745404296}
 --- !u!114 &129160156
 MonoBehaviour:
@@ -561,17 +561,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2791976822865339895, guid: 4a1baf678a8a9bb49b44e92db78a9790, type: 3}
   m_PrefabInstance: {fileID: 2791976823873278051}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1142175125 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2791976822865339894, guid: 4a1baf678a8a9bb49b44e92db78a9790, type: 3}
+--- !u!225 &1146505615 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: -5145197024040231689, guid: 4a1baf678a8a9bb49b44e92db78a9790, type: 3}
   m_PrefabInstance: {fileID: 2791976823873278051}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1165011159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,7 +1389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4591452720164335499, guid: 548e26d864f609c48b95a612f671543a, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4591452720164335499, guid: 548e26d864f609c48b95a612f671543a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1798,7 +1792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6706734089907286320, guid: df98694701d93604b942f336cc06a0f2, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6706734089907286320, guid: df98694701d93604b942f336cc06a0f2, type: 3}
       propertyPath: m_AnchorMax.x

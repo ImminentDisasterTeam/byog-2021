@@ -22,8 +22,6 @@ public class LevelLoader : MonoBehaviour {
     [SerializeField] private Sprite _normalDoor;
     [SerializeField] private Sprite _iceDoor;
 
-    public const string LevelDirectory = "Assets/Levels/";
-
     private const string WALL = "W";
     private const string BLOCK = "B";
     private const string SLIDER = "I";
