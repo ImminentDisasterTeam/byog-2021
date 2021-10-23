@@ -826,6 +826,12 @@ MonoBehaviour:
   - levelText: {fileID: 4900000, guid: c711fc2d826a8bc4b9ca027bf89da39f, type: 3}
     difficulty: 0
     tutorial: Anti-button is lava
+  - levelText: {fileID: 4900000, guid: daf46d174a679d241adfd1b9384954c0, type: 3}
+    difficulty: 0
+    tutorial: Ice block can't stop until meet the wall. Use it.
+  - levelText: {fileID: 4900000, guid: c2a39b07a04d9534eaf9378ef157c5cb, type: 3}
+    difficulty: 0
+    tutorial: Frosty...
   _allLevelsAvailable: 1
   _levelLoader: {fileID: 2004048938}
   _cameraController: {fileID: 2004048937}
