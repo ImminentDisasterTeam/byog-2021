@@ -64,6 +64,5 @@ public class GameLogic {
 
         _moves.Clear();
         _player.MovementAllowed = true;
-        Debug.LogError("FINISH");
     }
 }

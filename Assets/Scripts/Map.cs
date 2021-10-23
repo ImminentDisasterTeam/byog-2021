@@ -103,8 +103,8 @@ public class Map {
 
         UpdateButtons();
         var appliedMoves = movedEntities.Select(e => (e, direction)).ToList();
-        var slider = entity as SlidingEntity ?? 
-                     movedEntities.Count > 0? movedEntities[0] as SlidingEntity : null;
+        var slider = entity as SlidingEntity ??
+                     movedEntities.Count > 0 ? movedEntities.FirstOrDefault(e => e is SlidingEntity) as SlidingEntity : null;
         if (slider != null) {
             var nextMoves = Move(slider, direction);
             if (nextMoves != null)
