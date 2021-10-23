@@ -41,7 +41,10 @@ public class LevelController : MonoBehaviour {
 
     public void StartLevel(int levelIndex) {
         _currentLevelIndex = levelIndex;
-        var (level, buttons, player, exit) = _levelLoader.LoadLevel(_levels[levelIndex].levelText.text);
+        var levelData = _levels[levelIndex];
+        var (level, buttons, player, exit) = _levelLoader.LoadLevel(levelData.levelText.text);
+
+        UIController.Instance.SetTutorial(levelData.tutorial);
 
         var buttonList = (from row in buttons from button in row where button != null select button).ToList();
         _gameLogic.SetEntities(player, exit, buttonList, this);
