@@ -57,13 +57,13 @@ public class GameLogic {
         const float timePerMove = 0.2f;
 
         foreach (var (entity, move) in _moves) {
-            Debug.Log($"{_moves.Count}, {entity}, {move}");
-            _map.Move(entity, move * -1);
-
-            yield return new WaitForSeconds(timePerMove);
+            var appliedMoves = _map.Move(entity, move * -1);  // TODO: temporal; implement delay for animations
+            if (appliedMoves != null && appliedMoves.Count > 0)  // yes you will ALWAYS wait for the last move
+                yield return new WaitForSeconds(timePerMove);
         }
 
         _moves.Clear();
         _player.MovementAllowed = true;
+        Debug.LogError("FINISH");
     }
 }
