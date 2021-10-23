@@ -2,12 +2,12 @@
 using UnityEngine;
 
 public class PlayerEntity : Entity {
-    const string UP = "UP";
-    const string DOWN = "DOWN";
-    const string LEFT = "LEFT";
-    const string RIGHT = "RIGHT";
-    const string RESET = "RESET";
-    const string ESCAPE = "ESCAPE";
+    private const string UP = "UP";
+    private const string DOWN = "DOWN";
+    private const string LEFT = "LEFT";
+    private const string RIGHT = "RIGHT";
+    private const string RESET = "RESET";
+    private const string ESCAPE = "ESCAPE";
 
     public Action<Vector2Int> OnPlayerMove;
     public Action OnPlayerReset;

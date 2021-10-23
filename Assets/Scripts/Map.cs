@@ -4,17 +4,14 @@ using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-class Map {
-    private static Map _instance;
-    public static Map Instance => _instance ??= new Map();
-    private Map() {}
-
+public class Map {
+    public Action OnButtonsUpdate;
     public static readonly Vector2Int NoPos = Vector2Int.one * -1;
     private List<List<Entity>> _map;
     private List<List<Button>> _buttons;
 
     public void SetMap(List<List<Entity>> map, List<List<Button>> buttons) {
-        ClearMap();
+        Clear();
         _map = map;
         _buttons = buttons;
         for (var i = 0; i < _map.Count; i++) {
@@ -51,20 +48,22 @@ class Map {
         return p.x >= 0 && p.y >= 0 && p.x < _map.Count && p.y < _map[0].Count;
     }
 
-    private void ClearMap() {
+    public void Clear() {
         if (_map == null) {
             return;
         }
 
         foreach (var row in _map) {
             foreach (var tile in row) {
-                Object.Destroy(tile);
+                if (tile != null)
+                    Object.Destroy(tile.gameObject);
             }
         }
 
         foreach (var row in _buttons) {
             foreach (var button in row) {
-                Object.Destroy(button);
+                if (button != null)
+                    Object.Destroy(button.gameObject);
             }
         }
 
@@ -113,6 +112,6 @@ class Map {
                     btn.IsPressed = _map[i][j] != null;
             }
         }
-        GameLogic.Instance.CheckButtons();
+        OnButtonsUpdate?.Invoke();
     }
 }

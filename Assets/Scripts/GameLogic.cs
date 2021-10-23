@@ -5,17 +5,18 @@ using System.Linq;
 using UnityEngine;
 
 public class GameLogic {
-    private static GameLogic _instance;
-    public static GameLogic Instance => _instance ??= new GameLogic();
-    private GameLogic() {}
-
     public Action OnLevelWin;
 
+    private readonly Map _map;
     private PlayerEntity _player;
     private ExitEntity _exit;
     private readonly List<(Entity, Vector2Int)> _moves = new List<(Entity, Vector2Int)>();
     private MonoBehaviour _coroRunner;
     private List<Button> _buttons;
+
+    public GameLogic(Map map) {
+        _map = map;
+    }
 
     public void SetEntities(PlayerEntity player, ExitEntity exit, List<Button> buttons, MonoBehaviour coroRunner) {
         _player = player;
@@ -32,14 +33,14 @@ public class GameLogic {
     }
 
     private void OnPlayerMove(Vector2Int direction) {
-        var playerPos = Map.Instance.GetPos(_player);
-        var destinationEntity = Map.Instance.GetEntity(playerPos + direction);
+        var playerPos = _map.GetPos(_player);
+        var destinationEntity = _map.GetEntity(playerPos + direction);
         if (destinationEntity == _exit && _exit.IsActive) {
             OnLevelWin?.Invoke();
             return;
         }
         
-        var moves = Map.Instance.Move(_player, direction);
+        var moves = _map.Move(_player, direction);
         if (moves != null)
             _moves.AddRange(moves);
     }
@@ -57,7 +58,7 @@ public class GameLogic {
 
         foreach (var (entity, move) in _moves) {
             Debug.Log($"{_moves.Count}, {entity}, {move}");
-            Map.Instance.Move(entity, move * -1);
+            _map.Move(entity, move * -1);
 
             yield return new WaitForSeconds(timePerMove);
         }
