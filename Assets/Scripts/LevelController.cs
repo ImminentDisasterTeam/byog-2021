@@ -11,7 +11,15 @@ public class LevelController : MonoBehaviour {
     [SerializeField] private bool _allLevelsAvailable;
 
     public int LevelCount => _levels.Length;
-    public bool AllLevelsAvilable => _allLevelsAvailable;
+    private int CurrentMaxLevel {
+        get => PlayerPrefs.GetInt(LEVEL_KEY, 0);
+        set {
+            PlayerPrefs.SetInt(LEVEL_KEY, value);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public int MaxLevelAvailable => _allLevelsAvailable ? _levels.Length - 1 : CurrentMaxLevel;
 
     [SerializeField] private LevelLoader _levelLoader;
     [SerializeField] private CameraController _cameraController;
@@ -66,11 +74,10 @@ public class LevelController : MonoBehaviour {
 
     public void FinishLevel(bool success) {
         if (success) {
-            var currentMaxLevel = PlayerPrefs.GetInt(LEVEL_KEY, 0);
-            if (currentMaxLevel == _currentLevelIndex) {
-                PlayerPrefs.SetInt(LEVEL_KEY, currentMaxLevel + 1);
-                PlayerPrefs.Save();
-            }
+            if (CurrentMaxLevel == _currentLevelIndex)
+                CurrentMaxLevel++;
+            UIController.Instance.ShowLevelWin(() => _map.Clear(), _currentLevelIndex);
+            return;
         }
 
         UIController.Instance.ShowMainMenu(() => _map.Clear());
