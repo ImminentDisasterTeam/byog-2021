@@ -691,8 +691,8 @@ RectTransform:
   - {fileID: 1041568983}
   - {fileID: 1799247361}
   - {fileID: 758657189}
-  - {fileID: 1039292589}
   - {fileID: 1937252733}
+  - {fileID: 1039292589}
   m_Father: {fileID: 129160154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -821,6 +821,9 @@ MonoBehaviour:
   - levelText: {fileID: 4900000, guid: c2a39b07a04d9534eaf9378ef157c5cb, type: 3}
     difficulty: 0
     tutorial: Frosty...
+  - levelText: {fileID: 4900000, guid: b62b6d2d6653ffb4ebd2924bd6503769, type: 3}
+    difficulty: 0
+    tutorial: I don't think that freeze allergy is OK
   _allLevelsAvailable: 1
   _levelLoader: {fileID: 2004048938}
   _cameraController: {fileID: 2004048937}
