@@ -28,7 +28,7 @@ namespace UI {
 
                 var button = Instantiate(_buttonPrefab, row);
                 button.Label = $"{i + 1}";
-                button.Button.enabled = i <= levelController.MaxLevelAvailable;
+                button.Button.interactable = i <= levelController.MaxLevelAvailable;
 
                 var index = i;
                 button.Button.onClick.AddListener(() => StartLevel(index));
