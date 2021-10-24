@@ -98,6 +98,14 @@ namespace UI {
             _levelUI.SetTutorial(tutorial);
         }
 
+        public void StartRewind() {
+            _levelUI.StartRewind();
+        }
+
+        public void StopRewind() {
+            _levelUI.StopRewind();
+        }
+
         public void ShowLevelWin(Action onClose, int finishedLevelIndex) {
             ShowHider();
             _levelWin.transform.SetAsLastSibling();

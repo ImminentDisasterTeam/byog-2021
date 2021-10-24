@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using UI;
 using UnityEngine;
 
 public class GameLogic {
@@ -67,10 +68,12 @@ public class GameLogic {
 
     private void Reset(Action onDone = null) {
         _player.MovementAllowed = false;
+        UIController.Instance.StartRewind();
 
         void Finish() {
             _moves.Clear();
             onDone?.Invoke();
+            UIController.Instance.StopRewind();
             _player.MovementAllowed = true;
         }
 
