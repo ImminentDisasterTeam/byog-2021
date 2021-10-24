@@ -12,6 +12,10 @@ namespace UI {
             _settingsButton.onClick.AddListener(() => UIController.Instance.ShowSettings(this));
             _creditsButton.onClick.AddListener(() => UIController.Instance.ShowCredits(this));
             _exitButton.onClick.AddListener(() => UIController.Instance.CloseGame());
+
+            #if UNITY_WEBGL
+            _exitButton.gameObject.SetActive(false);
+            #endif
         }
     }
 }
