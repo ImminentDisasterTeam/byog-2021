@@ -9,12 +9,18 @@ namespace UI {
         [SerializeField] private UnityEngine.UI.Button _backButton;
 
         private void Start() {
-            _soundsSlider.value = SoundController.Instance.SoundVolume;
-            _musicSlider.value = SoundController.Instance.MusicVolume;
-            _soundsSlider.onValueChanged.AddListener(val => SoundController.Instance.SoundVolume = val);
-            _musicSlider.onValueChanged.AddListener(val => SoundController.Instance.MusicVolume = val);
+            var soundController = SoundController.Instance;
+            _soundsSlider.value = soundController.SoundVolume;
+            _musicSlider.value = soundController.MusicVolume;
+            _soundsSlider.onValueChanged.AddListener(val => soundController.SoundVolume = val);
+            _musicSlider.onValueChanged.AddListener(val => soundController.MusicVolume = val);
 
             _backButton.onClick.AddListener(() => Hide(null));
+        }
+
+        public void OnEndDrag() {
+            var soundController = SoundController.Instance;
+            soundController.PlaySound(soundController.ButtonPressClip);
         }
 
         protected override void PerformShow(Action onDone) {
