@@ -812,13 +812,13 @@ MonoBehaviour:
     tutorial: Reset it! Reset it more!
   - levelText: {fileID: 4900000, guid: ed9eaec531e88d4409ad63d0f515d5ad, type: 3}
     decorationType: 3
-    tutorial: Just think in all directions.
+    tutorial: Just think in all directions. (You can skip this level)
   - levelText: {fileID: 4900000, guid: 5f40321c6eeae45408d7ea402d3bf121, type: 3}
     decorationType: 0
     tutorial: Tssssss.....BOOOM!
   - levelText: {fileID: 4900000, guid: b8f0ff97632f2904bb3cc29c22227bee, type: 3}
     decorationType: 3
-    tutorial: Nobody here to help you...
+    tutorial: Nobody here to help you... (You can skip this level)
   - levelText: {fileID: 4900000, guid: 98cdb92bd5bc8fd4697b03b8b18b175a, type: 3}
     decorationType: 0
     tutorial: Anti-buttons don't want to be stepped on.
@@ -830,7 +830,7 @@ MonoBehaviour:
     tutorial: It's not minesweeper, but it can explode your brain.
   - levelText: {fileID: 4900000, guid: c711fc2d826a8bc4b9ca027bf89da39f, type: 3}
     decorationType: 3
-    tutorial: Anti-button is lava.
+    tutorial: Anti-button is lava. (You can skip this level)
   - levelText: {fileID: 4900000, guid: daf46d174a679d241adfd1b9384954c0, type: 3}
     decorationType: 4
     tutorial: Ice blocks won't stop until they collide with a wall. Use them.
