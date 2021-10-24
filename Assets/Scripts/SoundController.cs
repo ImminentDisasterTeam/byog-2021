@@ -77,6 +77,7 @@ public class SoundController : MonoBehaviour {
         source.clip = sound;
         source.Play();
         source.volume = SoundVolume;
+        source.pitch = 1;
 
         return source;
     }

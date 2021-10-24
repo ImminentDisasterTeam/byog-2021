@@ -43,17 +43,21 @@ public class GameLogic {
         }
 
         _player.MovementAllowed = false;
-        var oldPos = _map.GetPos(_player);
         _map.Move(_player, direction, moves => {
-            var soundController = SoundController.Instance;
             if (moves != null && moves.Count != 0) {
                 _moves.AddRange(moves);
-                soundController.PlaySound(soundController.NotPlayerMoveClip);
-            } else if (_map.GetPos(_player) != oldPos) {
-                soundController.PlaySound(soundController.PlayerMoveClip);
             }
 
             _player.MovementAllowed = true;
+        }, entities => {
+            var soundController = SoundController.Instance;
+            if (entities.FindIndex(e => e is SlidingEntity) != -1) {
+                soundController.PlaySound(soundController.NotPlayerMoveClip).pitch = 1.2f;
+            } else if (entities.FindIndex(e => !(e is PlayerEntity)) != -1) {
+                soundController.PlaySound(soundController.NotPlayerMoveClip);
+            } else if (entities.FindIndex(e => e is PlayerEntity) != -1) {
+                soundController.PlaySound(soundController.PlayerMoveClip);
+            }
         });
     }
 
@@ -63,7 +67,20 @@ public class GameLogic {
 
         var soundController = SoundController.Instance;
         var sound = soundController.PlaySound(soundController.ResetClip);
-        Reset(() => sound.DOFade(0, 1f).OnComplete(sound.Stop));
+        Reset(() => {
+            if (sound.isPlaying)
+                sound.DOFade(0, 0.2f).OnComplete(() => {
+                    sound.Stop();
+                    FinishReset();
+                });
+            else
+                FinishReset();
+            
+            void FinishReset() {
+                UIController.Instance.StopRewind();
+                _player.MovementAllowed = true;
+            }
+        });
     }
 
     private void Reset(Action onDone = null) {
@@ -73,8 +90,6 @@ public class GameLogic {
         void Finish() {
             _moves.Clear();
             onDone?.Invoke();
-            UIController.Instance.StopRewind();
-            _player.MovementAllowed = true;
         }
 
         var idx = -1;

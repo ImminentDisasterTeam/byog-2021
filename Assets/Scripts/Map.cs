@@ -82,7 +82,7 @@ public class Map {
         _buttons = null;
     }
 
-    public void Move(Entity entity, Vector2Int direction, Action<List<(Entity, Vector2Int)>> onDone) {
+    public void Move(Entity entity, Vector2Int direction, Action<List<(Entity, Vector2Int)>> onDone, Action<List<Entity>> playSoundForEntities = null) {
         if (direction.magnitude != 1)
             throw new Exception($"DIRECTION MAGNITUDE != 1; direction: {direction}");
 
@@ -106,6 +106,7 @@ public class Map {
             movedEntities.Add(currentEntity);
         }
 
+        var entitiesForSounds = new List<Entity>();
         var moveFuncs = new List<Action<Action>>();
         for (var i = positionsToMove.Count - 1; i >= 0; i--) {
             var pos = positionsToMove[i];
@@ -114,12 +115,14 @@ public class Map {
             var objToMove = _map[pos.x][pos.y];
             _map[nextPos.x][nextPos.y] = objToMove;
             _map[pos.x][pos.y] = null;
-            
+
             moveFuncs.Add(onDone => {
                 objToMove.SetPosition(nextPos, onDone);
             });
+            entitiesForSounds.Add(objToMove);
         }
 
+        playSoundForEntities?.Invoke(entitiesForSounds);
         new Gather(moveFuncs, AfterMove);
 
         void AfterMove() {
