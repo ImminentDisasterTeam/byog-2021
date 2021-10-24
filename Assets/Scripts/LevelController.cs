@@ -35,7 +35,7 @@ public class LevelController : MonoBehaviour {
             throw new ApplicationException("ONLY ONE UICONTROLLER ALLOWED");
         Instance = this;
 
-        _map = new Map(_mapRoot);
+        _map = new Map();
         _gameLogic = new GameLogic(_map);
         _map.OnButtonsUpdate = _gameLogic.CheckButtons;
     }

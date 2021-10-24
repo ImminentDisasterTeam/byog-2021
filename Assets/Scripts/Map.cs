@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Utils;
 using Object = UnityEngine.Object;
 
 public class Map {
     public Action OnButtonsUpdate;
     public static readonly Vector2Int NoPos = Vector2Int.one * -1;
-    private readonly Transform _mapRoot;
     private List<List<Entity>> _map;
     private List<List<Button>> _buttons;
     private List<List<Floor>> _floors;
-
-    public Map(Transform mapRoot) {
-        _mapRoot = mapRoot;
-    }
 
     public void SetMap(List<List<Entity>> map, List<List<Button>> buttons, List<List<Floor>> floors) {
         Clear();
@@ -23,7 +19,7 @@ public class Map {
         _floors = floors;
         for (var i = 0; i < _map.Count; i++) {
             for (var j = 0; j < _map[i].Count; j++) {
-                _map[i][j]?.SetPosition(new Vector2Int(i, j), true);
+                _map[i][j]?.SetPosition(new Vector2Int(i, j));
                 _buttons[i][j]?.SetPosition(new Vector2Int(i, j));
                 _floors[i][j]?.SetPosition(new Vector2Int(i, j));
             }
@@ -86,7 +82,7 @@ public class Map {
         _buttons = null;
     }
 
-    public List<(Entity, Vector2Int)> Move(Entity entity, Vector2Int direction) {
+    public void Move(Entity entity, Vector2Int direction, Action<List<(Entity, Vector2Int)>> onDone) {
         if (direction.magnitude != 1)
             throw new Exception($"DIRECTION MAGNITUDE != 1; direction: {direction}");
 
@@ -101,32 +97,50 @@ public class Map {
             if (currentEntity == null)
                 break;
 
-            if (!currentEntity.CanBeMoved())
-                return null;
+            if (!currentEntity.CanBeMoved()) {
+                onDone(null);
+                return;
+            }
 
             positionsToMove.Add(nextPos);
             movedEntities.Add(currentEntity);
         }
 
+        var moveFuncs = new List<Action<Action>>();
         for (var i = positionsToMove.Count - 1; i >= 0; i--) {
             var pos = positionsToMove[i];
             var nextPos = pos + direction;
-            _map[nextPos.x][nextPos.y] = _map[pos.x][pos.y];
-            _map[pos.x][pos.y].SetPosition(nextPos);
+
+            var objToMove = _map[pos.x][pos.y];
+            _map[nextPos.x][nextPos.y] = objToMove;
             _map[pos.x][pos.y] = null;
+            
+            moveFuncs.Add(onDone => {
+                objToMove.SetPosition(nextPos, onDone);
+            });
         }
 
-        UpdateButtons();
-        var appliedMoves = movedEntities.Select(e => (e, direction)).ToList();
-        var slider = entity as SlidingEntity ??
-                     movedEntities.Count > 0 ? movedEntities.FirstOrDefault(e => e is SlidingEntity) as SlidingEntity : null;
-        if (slider != null) {
-            var nextMoves = Move(slider, direction);
-            if (nextMoves != null)
-                appliedMoves.AddRange(nextMoves);
-        }
+        new Gather(moveFuncs, AfterMove);
+        
+        void AfterMove() {
+            UpdateButtons();
+            var appliedMoves = movedEntities.Select(e => (e, direction)).ToList();
+            var slider = entity as SlidingEntity ??
+                         movedEntities.Count > 0
+                ? movedEntities.FirstOrDefault(e => e is SlidingEntity) as SlidingEntity
+                : null;
+            if (slider != null) {
+                Move(slider, direction, nextMoves => {
+                    if (nextMoves != null)
+                        appliedMoves.AddRange(nextMoves);
+                    onDone(appliedMoves);
+                });
 
-        return appliedMoves;
+                return;
+            }
+
+            onDone(appliedMoves);
+        }
     }
 
     private void UpdateButtons() {

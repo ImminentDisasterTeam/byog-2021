@@ -39,30 +39,41 @@ public class GameLogic {
             OnLevelWin?.Invoke();
             return;
         }
-        
-        var moves = _map.Move(_player, direction);
-        if (moves != null)
-            _moves.AddRange(moves);
+
+        _player.MovementAllowed = false;
+        _map.Move(_player, direction, moves => {
+            if (moves != null)
+                _moves.AddRange(moves);
+            _player.MovementAllowed = true;
+        });
     }
 
     private void OnPlayerRewind() {
         if (_moves.Count == 0)
             return;
 
-        _player.MovementAllowed = false;
-        _coroRunner.StartCoroutine(Reset());
+        Reset();
     }
 
-    private IEnumerator Reset() {
-        const float timePerMove = 0.2f;
+    private void Reset() {
+        _player.MovementAllowed = false;
 
-        foreach (var (entity, move) in _moves) {
-            var appliedMoves = _map.Move(entity, move * -1);  // TODO: temporal; implement delay for animations
-            if (appliedMoves != null && appliedMoves.Count > 0)  // yes you will ALWAYS wait for the last move
-                yield return new WaitForSeconds(timePerMove);
+        void Finish() {
+            _moves.Clear();
+            _player.MovementAllowed = true;
         }
 
-        _moves.Clear();
-        _player.MovementAllowed = true;
+        var idx = -1;
+        void ApplyReverseMove() {
+            if (++idx >= _moves.Count) {
+                Finish();
+                return;
+            }
+
+            var (entity, move) = _moves[idx];
+            _map.Move(entity, move * -1, _ => ApplyReverseMove());
+        }
+
+        ApplyReverseMove();
     }
 }
