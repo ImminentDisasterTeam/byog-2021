@@ -891,11 +891,11 @@ MonoBehaviour:
   _sounds: {fileID: 1304687968}
   _music: {fileID: 2019716601}
   _menuClip: {fileID: 8300000, guid: a2d559943bda3de4985e6f52776a7c6f, type: 3}
-  _levelClip: {fileID: 8300000, guid: 1225e29af9904ed4093afa23482ad4a9, type: 3}
+  _levelClip: {fileID: 8300000, guid: 5dcd5a0f0cf09f249a29f7676d4f876c, type: 3}
   _playerMoveClip: {fileID: 8300000, guid: 07c21607d9e030c4091166b8321d8a1d, type: 3}
   _notPlayerMoveClip: {fileID: 8300000, guid: 07c21607d9e030c4091166b8321d8a1d, type: 3}
-  _buttonPressClip: {fileID: 8300000, guid: ab26996efeb5598498cd214d7526bd3a, type: 3}
-  _levelButtonPressClip: {fileID: 8300000, guid: 5b2532d5baf800e4ebcc2805ec59dcb4, type: 3}
+  _buttonPressClip: {fileID: 8300000, guid: 5b2532d5baf800e4ebcc2805ec59dcb4, type: 3}
+  _levelButtonPressClip: {fileID: 8300000, guid: ab26996efeb5598498cd214d7526bd3a, type: 3}
   _doorEnterClip: {fileID: 8300000, guid: bc1dc0a162580c744b819fd749a82778, type: 3}
   _resetClip: {fileID: 8300000, guid: ddac5033455927a4e8bf245d271755ba, type: 3}
 --- !u!1 &2019716599
