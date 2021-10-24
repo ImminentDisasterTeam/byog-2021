@@ -27,7 +27,6 @@ public class LevelController : MonoBehaviour {
 
     private readonly Map _map;
     private readonly GameLogic _gameLogic;
-    private Level _currentLevel;
     private int _currentLevelIndex;
 
     public LevelController() {

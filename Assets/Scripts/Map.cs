@@ -24,7 +24,7 @@ public class Map {
                 _floors[i][j]?.SetPosition(new Vector2Int(i, j));
             }
         }
-        UpdateButtons();
+        UpdateButtons(true);
     }
 
     public Vector2Int GetPos(Entity entity) {
@@ -143,7 +143,7 @@ public class Map {
         }
     }
 
-    private void UpdateButtons() {
+    private void UpdateButtons(bool setup = false) {
         bool anyActive = false;
         for (var i = 0; i < _map.Count; i++) {
             for (var j = 0; j < _map[i].Count; j++) {
@@ -157,7 +157,7 @@ public class Map {
             }
         }
 
-        if (anyActive) {
+        if (!setup && anyActive) {
             var soundController = SoundController.Instance;
             soundController.PlaySound(soundController.LevelButtonPressClip);
         }
