@@ -78,8 +78,12 @@ public class LevelController : MonoBehaviour {
 
     public void FinishLevel(bool success) {
         if (success) {
-            if (CurrentMaxLevel == _currentLevelIndex)
-                CurrentMaxLevel++;
+            if (CurrentMaxLevel == _currentLevelIndex) {
+                if (_levels.Length > _currentLevelIndex + 1 && _levels[_currentLevelIndex + 1].decorationType == DecorationType.Red)
+                    CurrentMaxLevel += 2;
+                else
+                    CurrentMaxLevel += 1;
+            }
             UIController.Instance.ShowLevelWin(() => _map.Clear(), _currentLevelIndex);
             return;
         }
