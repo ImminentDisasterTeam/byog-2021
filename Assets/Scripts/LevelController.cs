@@ -28,6 +28,7 @@ public class LevelController : MonoBehaviour {
     private readonly Map _map;
     private readonly GameLogic _gameLogic;
     private int _currentLevelIndex;
+    private PlayerEntity _currentPlayer;
 
     public LevelController() {
         if (Instance != null)
@@ -43,6 +44,7 @@ public class LevelController : MonoBehaviour {
         _currentLevelIndex = levelIndex;
         var levelData = _levels[levelIndex];
         var (level, buttons, floors, player, exit) = _levelLoader.LoadLevel(_mapRoot, levelData.levelText.text, levelData.decorationType);
+        _currentPlayer = player;
 
         UIController.Instance.SetTutorial(levelData.tutorial);
 
@@ -76,6 +78,7 @@ public class LevelController : MonoBehaviour {
     }
 
     public void FinishLevel(bool success) {
+        SetCanMove(false);
         if (success) {
             if (CurrentMaxLevel == _currentLevelIndex) {
                 if (_levels.Length > _currentLevelIndex + 1 && _levels[_currentLevelIndex + 1].decorationType == DecorationType.Red)
@@ -88,6 +91,11 @@ public class LevelController : MonoBehaviour {
         }
 
         UIController.Instance.ShowMainMenu(() => _map.Clear());
+    }
+
+    public void SetCanMove(bool state) {
+        if (_currentPlayer)
+            _currentPlayer.MovementAllowed = state;
     }
 
     [Serializable]

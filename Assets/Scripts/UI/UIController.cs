@@ -45,6 +45,7 @@ namespace UI {
         }
 
         public void ShowMainMenu(Action onCurtainMiddle = null, bool fromStart = false) {
+            LevelController.Instance.SetCanMove(false);
             _levelWin.Hide(() =>
                 _pause.Hide(() => {
                     HideHider();
@@ -111,6 +112,7 @@ namespace UI {
             _levelWin.transform.SetAsLastSibling();
             _levelWin.OnStartHiding += () => HideHider();
             _levelWin.SetFinishedLevel(finishedLevelIndex);
+            LevelController.Instance.SetCanMove(false);
             _levelWin.Show(null, onClose);
         }
 
@@ -170,7 +172,8 @@ namespace UI {
             ShowHider();
             _pause.transform.SetAsLastSibling();
             _pause.OnStartHiding += () => HideHider();
-            _pause.Show(null);
+            LevelController.Instance.SetCanMove(false);
+            _pause.Show(null, () => LevelController.Instance.SetCanMove(true));
         }
         
         public void CloseGame() {
