@@ -843,7 +843,7 @@ MonoBehaviour:
   - levelText: {fileID: 4900000, guid: 77c0f0482377eb64ab6cdb0fc7e64c0a, type: 3}
     decorationType: 4
     tutorial: Just why?
-  _allLevelsAvailable: 1
+  _allLevelsAvailable: 0
   _levelLoader: {fileID: 2004048938}
   _cameraController: {fileID: 2004048937}
   _mapRoot: {fileID: 343391288}
