@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 5678984999043887889}
   - component: {fileID: 5678984999043887894}
   - component: {fileID: -1235510179358485918}
+  - component: {fileID: 5176308872423755956}
   m_Layer: 5
   m_Name: SelectLevelButton
   m_TagString: Untagged
@@ -269,4 +270,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _label: {fileID: 5678984998787352370}
+  _button: {fileID: 5678984999043887894}
+--- !u!114 &5176308872423755956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678984999043887892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af73c6c13ab4484e85e3d96bb474bdea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _button: {fileID: 5678984999043887894}

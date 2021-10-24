@@ -32,7 +32,7 @@ public class LevelController : MonoBehaviour {
 
     public LevelController() {
         if (Instance != null)
-            throw new ApplicationException("ONLY ONE UICONTROLLER ALLOWED");
+            throw new ApplicationException("ONLY ONE LEVELCONTROLLER ALLOWED");
         Instance = this;
 
         _map = new Map();
@@ -48,7 +48,7 @@ public class LevelController : MonoBehaviour {
         UIController.Instance.SetTutorial(levelData.tutorial);
 
         var buttonList = (from row in buttons from button in row where button != null select button).ToList();
-        _gameLogic.SetEntities(player, exit, buttonList, this);
+        _gameLogic.SetEntities(player, exit, buttonList);
         _map.SetMap(level, buttons, floors);
 
         var levelSize = new Vector2Int(level.Count, level[0].Count);

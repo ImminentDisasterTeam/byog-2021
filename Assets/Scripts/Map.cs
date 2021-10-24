@@ -121,7 +121,7 @@ public class Map {
         }
 
         new Gather(moveFuncs, AfterMove);
-        
+
         void AfterMove() {
             UpdateButtons();
             var appliedMoves = movedEntities.Select(e => (e, direction)).ToList();
@@ -144,13 +144,24 @@ public class Map {
     }
 
     private void UpdateButtons() {
+        bool anyActive = false;
         for (var i = 0; i < _map.Count; i++) {
             for (var j = 0; j < _map[i].Count; j++) {
                 var btn = _buttons[i][j];
-                if (btn != null)
-                    btn.IsPressed = _map[i][j] != null;
+                if (btn != null) {
+                    var pressed = _map[i][j] != null;
+                    var oldActive = btn.IsActive();
+                    btn.IsPressed = pressed;
+                    anyActive = anyActive || !oldActive && btn.IsActive();
+                }
             }
         }
+
+        if (anyActive) {
+            var soundController = SoundController.Instance;
+            soundController.PlaySound(soundController.LevelButtonPressClip);
+        }
+
         OnButtonsUpdate?.Invoke();
     }
 }

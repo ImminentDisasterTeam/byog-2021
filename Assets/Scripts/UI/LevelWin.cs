@@ -52,7 +52,7 @@ namespace UI {
 
         private void StartNextLevel() {
             UIController.Instance.ShowLevelUI(() => 
-                LevelController.Instance.StartLevel(_finishedLevelIndex + 1));
+                LevelController.Instance.StartLevel(_finishedLevelIndex + 1), true);
         }
     }
 }

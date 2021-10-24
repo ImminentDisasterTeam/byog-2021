@@ -8,25 +8,18 @@ namespace UI {
         [SerializeField] private UnityEngine.UI.Slider _musicSlider;
         [SerializeField] private UnityEngine.UI.Button _backButton;
 
-        private const string SOUNDS = "SOUNDS";
-        private const string MUSIC = "MUSIC";
-
         private void Start() {
-            _soundsSlider.value = PlayerPrefs.GetFloat(SOUNDS, 1f);
-            _musicSlider.value = PlayerPrefs.GetFloat(MUSIC, 1f);
-
-            _soundsSlider.onValueChanged.AddListener(val => OnValueChanged(val, SOUNDS));
-            _musicSlider.onValueChanged.AddListener(val => OnValueChanged(val, MUSIC));
+            _soundsSlider.value = SoundController.Instance.SoundVolume;
+            _musicSlider.value = SoundController.Instance.MusicVolume;
+            _soundsSlider.onValueChanged.AddListener(val => SoundController.Instance.SoundVolume = val);
+            _musicSlider.onValueChanged.AddListener(val => SoundController.Instance.MusicVolume = val);
 
             _backButton.onClick.AddListener(() => Hide(null));
         }
 
-        private void OnValueChanged(float value, string type) {
-            PlayerPrefs.SetFloat(type, value);
-            PlayerPrefs.Save();
-        }
-
         protected override void PerformShow(Action onDone) {
+            _soundsSlider.value = SoundController.Instance.SoundVolume;
+            _musicSlider.value = SoundController.Instance.MusicVolume;
             const float showTime = 0.5f;
 
             transform.localScale = Vector3.zero;

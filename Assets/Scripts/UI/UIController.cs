@@ -1,7 +1,6 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI {
     public class UIController : MonoBehaviour {
@@ -23,12 +22,35 @@ namespace UI {
         [SerializeField] private CanvasGroup _hider;
         [SerializeField] private CanvasGroup _curtain;
 
+        private const float MusicTransitionTime = 0.6f;
+        private AudioSource _musicSource;
+
+        private void SetMusic(AudioClip music) {
+            var soundController = SoundController.Instance;
+
+            if (_musicSource != null) 
+                TransitionVolume(soundController.MusicVolume, 0, UpdateClip);
+            else
+                UpdateClip();
+
+            void UpdateClip() {
+                _musicSource = soundController.PlayMusic(music);
+                TransitionVolume(0, soundController.MusicVolume);
+            }
+
+            void TransitionVolume(float from, float to, Action onDone = null) {
+                _musicSource.volume = from;
+                _musicSource.DOFade(to, MusicTransitionTime).OnComplete(() => onDone?.Invoke());
+            }
+        }
+
         public void ShowMainMenu(Action onCurtainMiddle = null, bool fromStart = false) {
             _levelWin.Hide(() =>
                 _pause.Hide(() => {
                     HideHider();
                     _levelUI.Hide(() => 
                         ShowCurtain(() => {
+                            SetMusic(SoundController.Instance.MenuClip);
                             _mainMenu.Show(null);
                             onCurtainMiddle?.Invoke();
                         }, null, fromStart));
@@ -48,7 +70,6 @@ namespace UI {
             _settings.OnStartHiding += () => {
                 if (invoker is MainMenu)
                     HideHider();
-                    
             };
             _settings.Show(null, () => {
                 invoker.transform.SetAsLastSibling();
@@ -62,10 +83,12 @@ namespace UI {
             _credits.Show(null);
         }
 
-        public void ShowLevelUI(Action onCurtainMiddle) {
+        public void ShowLevelUI(Action onCurtainMiddle, bool fromLevel = false) {
             _selectLevel.Hide(() =>
                 _levelWin.Hide(() =>
                     ShowCurtain(() => {
+                            if (!fromLevel)
+                                SetMusic(SoundController.Instance.LevelClip);
                             _mainMenu.Hide(null);
                             onCurtainMiddle?.Invoke();
                         }, () => _levelUI.Show(null))));
@@ -84,7 +107,7 @@ namespace UI {
         }
 
         private void ShowCurtain(Action onCurtainMiddle, Action onCurtainEnd = null, bool startFromMiddle = false) {
-            const float fadeTime = 0.2f;
+            const float fadeTime = 0.25f;
             const float waitTime = 0.3f;
 
             _curtain.alpha = 0f;
